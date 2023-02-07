@@ -1,0 +1,73 @@
+<div class="sidenav-header">
+	<i
+		(click)="toggleSidebar()"
+		class="fa-solid fa-xmark p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-xl-none"
+		aria-hidden="true"
+		id="iconSidenav"
+	></i>
+</div>
+<hr class="horizontal dark mt-0" />
+<div class="collapse navbar-collapse w-auto h-auto h-100" id="sidenav-collapse-main">
+	<ul class="navbar-nav">
+		<li class="nav-item" *ngFor="let menuitem of routes" routerLinkActive="active">
+			<!--If is a single link-->
+			<a class="nav-link" [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'" routerLinkActive="active">
+				<div
+					class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2"
+				>
+					<i class="{{ menuitem.icon }}"></i>
+				</div>
+				<span class="nav-link-text ms-1">{{ menuitem.title | translate }}</span>
+			</a>
+			<!--If it have a submenu-->
+			<a
+				class="nav-link"
+				data-bs-toggle="collapse"
+				data-toggle="collapse"
+				*ngIf="menuitem.type === 'sub'"
+				(click)="menuitem.isCollapsed = !menuitem.isCollapsed"
+				[attr.aria-expanded]="!menuitem.isCollapsed"
+				[attr.aria-controls]="menuitem.collapse"
+			>
+				<div
+					class="icon icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2"
+				>
+					<i class="{{ menuitem.icon }}"></i>
+				</div>
+				<span class="nav-link-text ms-1">{{ menuitem.title | translate }}</span>
+			</a>
+
+			<!--Display the submenu items-->
+			<div id="{{ menuitem.collapse }}" class="collapse" *ngIf="menuitem.type === 'sub'">
+				<ul class="nav ms-4 ps-3">
+					<li class="nav-item" *ngFor="let childitems of menuitem.children">
+						<!--If is a single link-->
+						<a class="nav-link" routerLinkActive="active" [routerLink]="[menuitem.path]" *ngIf="childitems.type === 'link'">
+							<span class="sidenav-normal">{{ childitems.title | translate }}</span>
+						</a>
+						<!--If it have a submenu-->
+						<a
+							data-toggle="collapse"
+							(click)="childitems.isCollapsed = !childitems.isCollapsed"
+							[attr.aria-expanded]="!childitems.isCollapsed"
+							[attr.aria-controls]="childitems.collapse"
+							*ngIf="childitems.type === 'sub'"
+						>
+							<span class="sidenav-normal">{{ childitems.title | translate }}<b class="caret"></b></span>
+						</a>
+						<!--Display the submenu items-->
+						<div id="{{ childitems.collapse }}" class="collapse" *ngIf="childitems.type === 'sub'">
+							<ul class="nav ms-4 ps-3">
+								<li class="nav-item" *ngFor="let childitem of childitems.children">
+									<a class="nav-link" routerLinkActive="active" [routerLink]="[menuitem.path]">
+										<span class="sidenav-normal"> {{ childitem.title | translate }} </span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>

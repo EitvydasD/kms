@@ -1,0 +1,10 @@
+<div class="card">
+	<kendo-grid [data]="users" (cellClick)="openDetails($event.dataItem)">
+		<kendo-grid-column field="name" [title]="'label.fullName' | translate">
+			<ng-template kendoGridCellTemplate let-dataItem> {{dataItem.firstName}} {{dataItem.lastName}} </ng-template>
+		</kendo-grid-column>
+		<kendo-grid-column field="email" [title]="'label.email' | translate"> </kendo-grid-column>
+		<kendo-grid-column field="phone" [title]="'label.phone' | translate"> </kendo-grid-column>
+		<kendo-grid-column field="birthDate" [title]="'label.birthDate' | translate"> </kendo-grid-column>
+	</kendo-grid>
+</div>

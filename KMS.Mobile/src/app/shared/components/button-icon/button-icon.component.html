@@ -1,0 +1,3 @@
+<button class="btn px-2 py-1" [class]="background" [ngClass]="[cssClass ?? '']" (click)="onClick.emit()" [disabled]="disabled">
+	<i class="me-2" [class]="[iconStyle, icon]"></i>{{ title }}
+</button>

@@ -1,0 +1,26 @@
+.loading-border::before {
+  border-top-color: $primary;
+  border-right-color: $primary;
+}
+
+@keyframes borderColor {
+  0% {
+    border-bottom-color: $primary;
+    border-left-color: $primary;
+  }
+  50% {
+    border-bottom-color: $primary;
+    border-left-color: $primary;
+  }
+}
+
+.k-tabstrip-items-wrapper .k-item:hover,
+.k-tabstrip-items-wrapper .k-item.k-state-hover {
+  color: $primary;
+}
+
+.k-tabstrip-items-wrapper .k-item.k-state-active,
+.k-tabstrip-items-wrapper .k-item.k-state-selected {
+  color: $primary;
+  border-bottom: 2px solid $primary !important;
+}

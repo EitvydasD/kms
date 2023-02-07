@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-0">
+	<div class="container-fluid p-1">
+		<div class="sidenav-toggler sidenav-toggler-inner me-auto" *ngIf="isAuthorized">
+			<a (click)="toggleSidebar()" class="nav-link text-body p-0 cursor-pointer" role="button">
+				<div class="sidenav-toggler-inner">
+					<i class="sidenav-toggler-line"></i>
+					<i class="sidenav-toggler-line"></i>
+					<i class="sidenav-toggler-line"></i>
+				</div>
+			</a>
+		</div>
+		<div class="d-flex justify-content-end ms-auto">
+			<account-popup></account-popup>
+		</div>
+	</div>
+</nav>

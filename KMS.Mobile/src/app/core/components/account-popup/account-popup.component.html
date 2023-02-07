@@ -1,0 +1,29 @@
+<div *ngIf="isAuthorized" role="button" (click)="isExpanded = !isExpanded">
+	<div class="d-flex align-middle">
+		<div class="text-end">
+			<p class="mb-0 mt-1 fw-bold fs-5">{{ fullName }}</p>
+			<p class="mb-0 mt-n1 text-secondary fw-normal fs-6">{{ role }}</p>
+		</div>
+		<div class="mx-3 my-1">
+			<img src="assets/images/user-profile.jpg" alt="profile_image" class="rounded-circle border user-profile" />
+		</div>
+		<div class="account-popup" *ngIf="isExpanded">
+			<div class="account-popup-content">
+				<ul>
+					<!-- <li [routerLink]="['account', 'profile']">
+						<a class="item fw-normal fs-6">
+							<i class="fas fa-solid fa-user text-primary"></i>
+							{{ 'label.profile' | translate }}
+						</a>
+					</li> -->
+					<li [routerLink]="['/logout']">
+						<a class="item fw-normal fs-6">
+							<i class="fas fa-solid fa-arrow-right-from-bracket text-danger"></i>
+							{{ 'label.signOut' | translate }}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

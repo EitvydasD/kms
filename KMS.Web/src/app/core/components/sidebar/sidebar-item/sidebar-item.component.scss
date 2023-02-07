@@ -1,0 +1,26 @@
+.sidebar-group {
+	padding-left: 1rem;
+}
+
+.sidebar-title {
+	display: block;
+	padding: 0.5rem 0;
+}
+
+.sidebar-root {
+	font-weight: bold;
+}
+
+// .sidebar-title.sidebar-sub::before {
+// 	content: '\25BA';
+// }
+
+.sidebar-title,
+.sidebar-link {
+	cursor: pointer;
+}
+
+.active,
+.sidebar-link:hover {
+	color: #599cff;
+}

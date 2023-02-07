@@ -1,0 +1,32 @@
+$navbar-height: 70px;
+
+.main-container {
+	margin-left: 15.625rem;
+}
+
+nav {
+	height: $navbar-height;
+}
+
+aside {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	max-width: 15.625rem !important;
+	overflow-y: auto;
+	padding-top: 0;
+	box-shadow: none;
+	min-height: 100vh;
+}
+
+#main-content {
+	display: block;
+	background-color: #f4f7fc;
+	height: calc(100vh - $navbar-height);
+}
+
+router-outlet {
+	min-height: calc(100vh - $navbar-height);
+}

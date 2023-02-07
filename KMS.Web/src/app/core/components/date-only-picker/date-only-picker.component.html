@@ -1,0 +1,8 @@
+<kendo-datepicker
+	placeholder=" "
+	[value]="value"
+	[disabled]="disabled"
+	(valueChange)="updateValue($event)"
+	(focus)="onFocus()"
+	[ngClass]="{ 'ng-invalid': control.invalid, 'ng-valid': control.valid, 'ng-touched': control.touched }"
+></kendo-datepicker>

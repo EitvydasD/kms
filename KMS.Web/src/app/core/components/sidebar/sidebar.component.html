@@ -1,0 +1,8 @@
+<nav class="sidebar-wrapper">
+	<h4 class="sidebar-header text-bold p-2">Cargo Management System</h4>
+	<div class="sidebar-content">
+		<ng-container *ngFor="let route of routes">
+			<sidebar-item *ngIf="route.isVisible" [route]="route" [path]="route.path"></sidebar-item>
+		</ng-container>
+	</div>
+</nav>

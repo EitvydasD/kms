@@ -1,0 +1,26 @@
+<ng-container *ngIf="route && route.isVisible">
+	<p
+		style="display: flex; align-items: center"
+		*ngIf="!route.children"
+		class="sidebar-link"
+		[routerLink]="path"
+		routerLinkActive="active"
+	>
+		<i [class]="route.icon" style="width: 2rem"></i>
+		<span class="sidebar-title">{{ route.title | translate }}</span>
+	</p>
+
+	<ng-container *ngIf="route.children">
+		<p style="display: flex; align-items: center" class="sidebar-title" (click)="route.expanded = !route.expanded">
+			<i
+				class="fa-solid fa-xs"
+				style="width: 20px"
+				[ngClass]="{ 'fa-caret-right' :  !route.expanded, 'fa-caret-down' : route.expanded}"
+			></i>
+			<span [ngClass]="{ 'sidebar-root' : route.isRoot }">{{ route.title }}</span>
+		</p>
+		<div class="sidebar-group" *ngIf="route.expanded">
+			<sidebar-item *ngFor="let child of route.children" [route]="child" [path]="path + child.path"></sidebar-item>
+		</div>
+	</ng-container>
+</ng-container>

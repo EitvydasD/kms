@@ -1,0 +1,69 @@
+{
+	"label": {
+		"firstName": "First name",
+		"lastName": "Last name",
+		"phone": "Phone",
+		"comment": "Comment",
+		"fullName": "Full name",
+		"email": "Email",
+		"signIn": "Sign in",
+		"signOut": "Sign out",
+		"username": "Username",
+		"password": "Password",
+		"dontHaveAccount": "Don't have an account?",
+		"haveAccount": "Already have an account?",
+		"signUp": "Sign up",
+		"roles": "Roles",
+		"birthDate": "Birth date",
+		"title": "Title",
+		"text": "Text",
+		"driver": "Driver",
+		"departedAt": "Departed at",
+		"arrivedAt": "Arrived at",
+		"status": "Status",
+		"responsible": "Responsible",
+		"reply": "Reply"
+	},
+
+	"action": {
+		"send": "Send",
+		"delete": "Delete",
+		"cancel": "Cancel",
+		"save": "Save",
+		"confirm": "Confirm",
+		"refresh": "Refresh",
+		"upload": "Upload",
+		"sendAll": "Send all",
+		"clear": "Clear",
+		"post": "Post",
+		"add": "Add",
+		"edit": "Edit",
+		"new": "New"
+	},
+
+	"menu": {
+		"users": "Users",
+		"forum": "Forum",
+		"profile": "Profile",
+		"trips": "Trips"
+	},
+
+	"alert": {
+		"success": "Success",
+		"info": "Info",
+		"error": "Error",
+		"notFound": "Not found",
+		"message": {
+			"inputRequired": "Input is required",
+			"delete": "Do you really want to delete?"
+		}
+	},
+
+	"ERROR": {
+		"MESSAGES": {
+			"CONTACT_ADMIN": "Please contact your administrator"
+		},
+		"ERROR_INCORRECT_CREDENTIALS": "Incorrect username or password",
+		"ERROR_UNKNOWN": "Unknown error"
+	}
+}

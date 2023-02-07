@@ -1,0 +1,53 @@
+<div class="card py-4" *ngIf="form">
+	<form [formGroup]="form" class="px-4">
+		<div class="d-flex justify-content-end">
+			<button *ngIf="canModifyTrip" class="m-0 btn btn-primary" (click)="onSave()" [disabled]="form.invalid">
+				{{'action.save' | translate}}
+			</button>
+			<button *ngIf="canDeleteTrip && !isNew" class="m-0 ms-2 btn btn-danger" (click)="deleteTrip()">
+				{{'action.delete' | translate}}
+			</button>
+		</div>
+		<div class="row">
+			<div class="col-12 col-md-3 col-lg-2" *ngIf="drivers.length > 0">
+				<kendo-floatinglabel class="w-100" [text]="'label.driver' | translate">
+					<kendo-combobox [data]="drivers" valueField="id" textField="firstName" formControlName="driver" placeholder=" ">
+						<ng-template kendoComboBoxItemTemplate let-dataItem> {{dataItem.firstName + ' ' + dataItem.lastName}} </ng-template>
+					</kendo-combobox>
+				</kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-md-3 col-lg-2">
+				<kendo-floatinglabel class="w-100" [text]="'label.arrivedAt' | translate">
+					<kendo-datepicker placeholder=" " formControlName="arrivedAt"></kendo-datepicker>
+				</kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-md-3 col-lg-2">
+				<kendo-floatinglabel class="w-100" [text]="'label.departedAt' | translate">
+					<kendo-datepicker placeholder=" " formControlName="departedAt"></kendo-datepicker>
+				</kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-md-3 col-lg-2">
+				<kendo-floatinglabel class="w-100" [text]="'label.status' | translate">
+					<kendo-combobox [valuePrimitive]="true" [data]="statuses" valueField="value" textField="name" formControlName="status">
+					</kendo-combobox>
+				</kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-md-3 col-lg-2" *ngIf="!isNew && users.length > 0">
+				<kendo-floatinglabel class="w-100" [text]="'label.responsible' | translate"
+					><kendo-multiselect
+						formControlName="responsible"
+						[data]="users"
+						textField="firstName"
+						valueField="id"
+						placeholder=" "
+						[clearButton]="false"
+					></kendo-multiselect
+				></kendo-floatinglabel>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,72 @@
+<div class="row mb-3" *ngIf="request">
+	<div class="col-12 col-md-3 col-lg-2" *ngIf="drivers.length > 0">
+		<kendo-floatinglabel class="w-100" [text]="'label.driver' | translate">
+			<kendo-combobox
+				[valuePrimitive]="true"
+				[data]="drivers"
+				valueField="id"
+				textField="firstName"
+				placeholder=" "
+				[(ngModel)]="request.driverId"
+				(valueChange)="onFilterChange({driverId: $event})"
+			>
+				<ng-template kendoComboBoxItemTemplate let-dataItem> {{dataItem.firstName + ' ' + dataItem.lastName}} </ng-template>
+			</kendo-combobox>
+		</kendo-floatinglabel>
+	</div>
+
+	<div class="col-12 col-md-3 col-lg-2">
+		<kendo-floatinglabel class="w-100" [text]="'label.arrivedAt' | translate">
+			<kendo-datepicker
+				placeholder=" "
+				[(ngModel)]="request.arrivedAt"
+				(valueChange)="onFilterChange({arrivedAt: $event})"
+			></kendo-datepicker>
+		</kendo-floatinglabel>
+	</div>
+
+	<div class="col-12 col-md-3 col-lg-2">
+		<kendo-floatinglabel class="w-100" [text]="'label.departedAt' | translate">
+			<kendo-datepicker
+				placeholder=" "
+				[(ngModel)]="request.departedAt"
+				(valueChange)="onFilterChange({departedAt: $event})"
+			></kendo-datepicker>
+		</kendo-floatinglabel>
+	</div>
+
+	<div class="col-12 col-md-3 col-lg-2">
+		<kendo-floatinglabel class="w-100" [text]="'label.status' | translate">
+			<kendo-combobox
+				[valuePrimitive]="true"
+				[data]="statuses"
+				valueField="value"
+				textField="name"
+				[(ngModel)]="request.status"
+				(valueChange)="onFilterChange({status: $event})"
+			>
+			</kendo-combobox>
+		</kendo-floatinglabel>
+	</div>
+
+	<div class="col-12 col-md-3 col-lg-2 d-flex align-self-center mt-3" *ngIf="hasPermissionViewAll">
+		<button class="btn btn-primary" (click)="openNew()">{{'action.new' | translate}}</button>
+	</div>
+</div>
+
+<div class="card">
+	<kendo-grid [data]="trips" (cellClick)="openDetails($event.dataItem)">
+		<kendo-grid-column field="driver" [title]="'label.fullName' | translate">
+			<ng-template kendoGridCellTemplate let-dataItem> {{dataItem.driver.firstName}} {{dataItem.driver.lastName}} </ng-template>
+		</kendo-grid-column>
+		<kendo-grid-column field="arrivedAt" [title]="'label.arrivedAt' | translate">
+			<ng-template kendoGridCellTemplate let-dataItem> {{dataItem.arrivedAt | date:'shortDate'}} </ng-template>
+		</kendo-grid-column>
+		<kendo-grid-column field="departedAt" [title]="'label.departedAt' | translate">
+			<ng-template kendoGridCellTemplate let-dataItem> {{dataItem.departedAt | date:'shortDate'}} </ng-template>
+		</kendo-grid-column>
+		<kendo-grid-column field="status" [title]="'label.status' | translate">
+			<ng-template kendoGridCellTemplate let-dataItem> {{getStatusName(dataItem.status)}} </ng-template>
+		</kendo-grid-column>
+	</kendo-grid>
+</div>

@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+@import './_bootstrap.scss';
+
+* {
+	font-family: 'Inter Regular', 'Open Sans';
+	font-style: normal;
+}
+
+h1 > *,
+h2 > *,
+h3 > *,
+h4 > *,
+h5 > *,
+h6 > * {
+	font-size: inherit;
+}
+
+.fa-hover-primary:hover {
+	color: #5e72e4;
+}
+
+.fa-hover-danger:hover {
+	color: #f5365c;
+}
+
+.form-combined
+	.input-group
+	> :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+	border: 1px solid #5e72e4 !important;
+}
+
+.btn.calendar {
+	height: 40px !important;
+}
+
+.form-control.ng-invalid.ng-touched:focus {
+	border-color: #dc3545;
+	box-shadow: 0 0 0 2px #fd5c7040;
+}
+
+.form-control.ng-invalid.ng-touched .k-state-focused,
+.form-control.ng-invalid.ng-touched.k-state-focused {
+	border-color: #dc3545;
+	box-shadow: 0 0 0 3px #fd5c7040;
+}
+.form-control.ng-invalid.ng-touched {
+	border-color: #dc3545;
+}
+
+.sidenav-collapse-main,
+.sidenav,
+#sidenav-collapse-main {
+	overflow: hidden;
+}
+
+@media (min-width: 1200px) {
+	.d-xl-transparent {
+		background-color: transparent !important;
+	}
+}
+@media all and (max-width: 1024px) {
+	.grid .k-grid-content {
+		max-height: 70vh;
+	}
+}
+@media all and (max-height: 640px) {
+	.grid .k-grid-content {
+		max-height: 55vh !important;
+	}
+}

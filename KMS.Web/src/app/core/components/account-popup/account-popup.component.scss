@@ -1,0 +1,47 @@
+.user-profile {
+	height: 3rem;
+	width: 3rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.account-popup {
+	color: white;
+	width: auto;
+	position: absolute;
+	right: 0;
+	background: white;
+	overflow: hidden;
+	z-index: 1020;
+	margin-top: calc(61px - 15px);
+	margin-right: 1px;
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	li:hover {
+		background-color: #f4f7fc;
+	}
+
+	li a,
+	li .item {
+		display: block;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+		text-decoration: none;
+		color: black;
+
+		i.fas {
+			margin-right: 0.2rem;
+			width: 1rem;
+		}
+	}
+}
+
+.account-popup-content {
+	border: 1px solid #dbdbdb;
+}

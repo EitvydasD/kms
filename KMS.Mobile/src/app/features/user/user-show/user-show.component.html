@@ -1,0 +1,55 @@
+<div class="card py-4" *ngIf="form">
+	<form [formGroup]="form" class="px-4">
+		<div class="d-flex justify-content-end">
+			<button *ngIf="isProfile" class="m-0 btn btn-primary" (click)="onSave()">{{'action.save' | translate}}</button>
+		</div>
+		<div class="row">
+			<div class="col-12 col-xl-6 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.firstName' | translate"
+					><kendo-textbox formControlName="firstName" placeholder=" "></kendo-textbox
+				></kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-xl-6 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.lastName' | translate"
+					><kendo-textbox formControlName="lastName" placeholder=" "></kendo-textbox
+				></kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-xl-6 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.email' | translate"
+					><kendo-textbox formControlName="email" placeholder=" "></kendo-textbox
+				></kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-xl-6 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.phone' | translate"
+					><kendo-textbox formControlName="phone" placeholder=" "></kendo-textbox
+				></kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-xl-6 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.birthDate' | translate"
+					><date-only-picker formControlName="birthDate" placeholder=""></date-only-picker
+				></kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 col-xl-6 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.roles' | translate"
+					><kendo-multiselect
+						formControlName="roles"
+						[data]="roles.filterableData"
+						[filterable]="true"
+						(filterChange)="roles.filter($event, 'name')"
+						(open)="onRolesOpen()"
+						[loading]="roles.isLoading"
+						textField="name"
+						valueField="id"
+						placeholder=" "
+						[clearButton]="false"
+					></kendo-multiselect
+				></kendo-floatinglabel>
+			</div>
+		</div>
+	</form>
+</div>

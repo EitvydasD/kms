@@ -1,0 +1,70 @@
+<div *ngIf="!parentComment" class="mb-3">
+	<form [formGroup]="form" class="row">
+		<div class="card pt-3">
+			<div class="col-12 mb-3">
+				<button (click)="postComment()" [disabled]="form.invalid" class="btn btn-primary w-100">
+					{{'action.post' | translate}}
+				</button>
+			</div>
+
+			<div class="col-12 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.title' | translate">
+					<kendo-textbox formControlName="title" placeholder=" "></kendo-textbox>
+				</kendo-floatinglabel>
+			</div>
+
+			<div class="col-12 mb-3">
+				<kendo-floatinglabel class="w-100" [text]="'label.text' | translate">
+					<kendo-textarea formControlName="text" placeholder=" "></kendo-textarea>
+				</kendo-floatinglabel>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="card pb-2 row">
+	<div *ngIf="parentComment">
+		<div class="d-flex justify-content-between">
+			<div class="fw-bold">{{parentComment.title}}</div>
+			<div>
+				<div class="text-secondary">
+					{{parentComment.author.firstName + ' ' + parentComment.author.lastName}} {{parentComment.createdAt | date:'short'}}
+				</div>
+			</div>
+		</div>
+		<div>{{parentComment.text}}</div>
+		<hr class="m-0 mb-2" />
+	</div>
+
+	<div *ngFor="let comment of comments" role="button" [ngClass]="{'ps-4' : parentComment !== undefined}" (click)="viewComment(comment)">
+		<div class="d-flex justify-content-between">
+			<div class="fw-bold" *ngIf="comment.title">{{comment.title}}</div>
+			<div class="fw-bold" *ngIf="!comment.title">{{comment.author.firstName + ' ' + comment.author.lastName}}</div>
+			<div>
+				<div class="text-secondary" *ngIf="comment.title">
+					{{comment.author.firstName + ' ' + comment.author.lastName}} {{comment.createdAt | date:'short'}}
+				</div>
+				<div class="text-secondary" *ngIf="!comment.title">{{comment.createdAt | date:'short'}}</div>
+			</div>
+		</div>
+		<div>{{comment.text}}</div>
+		<hr class="m-0 mb-2" />
+	</div>
+	<div *ngIf="parentComment">
+		<kendo-floatinglabel class="w-100" [text]="'label.reply' | translate">
+			<kendo-textarea #reply placeholder=" ">
+				<kendo-textarea-suffix class="custom-suffix">
+					<button
+						aria-label="Send"
+						kendoButton
+						fillMode="clear"
+						class="send-button"
+						(click)="postComment(reply.value); reply.value=''"
+					>
+						{{'action.send' | translate}}
+					</button>
+				</kendo-textarea-suffix>
+			</kendo-textarea>
+		</kendo-floatinglabel>
+	</div>
+</div>
