@@ -39,6 +39,7 @@ public class UserService : IUserService
 
     public async Task<UserEntity> CreateUser(UserEntity request, CancellationToken cancellationToken = default)
     {
+        // Create user
         return await UserRepo.AddAsync(request, cancellationToken);
     }
 
