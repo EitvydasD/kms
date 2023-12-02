@@ -19,12 +19,14 @@ public class UserService : IUserService
     private IRepository<UserEntity> UserRepo { get; }
     private ICommentService CommentService { get; }
 
+    // Get users
     public async Task<ICollection<UserEntity>> GetUsers(GetUserRequest request, CancellationToken cancellationToken = default)
     {
         var spec = new GetUsersSpec(request);
         return await UserRepo.ListAsync(spec, cancellationToken);
     }
 
+    // Get user
     public async Task<UserEntity> GetUser(Guid userId, CancellationToken cancellationToken = default)
     {
         var role = await UserRepo.FirstOrDefaultAsync(new GetUserSpec(userId), cancellationToken);
@@ -37,12 +39,13 @@ public class UserService : IUserService
         return role;
     }
 
+    // Create user
     public async Task<UserEntity> CreateUser(UserEntity request, CancellationToken cancellationToken = default)
     {
-        // Create user
         return await UserRepo.AddAsync(request, cancellationToken);
     }
 
+    // Update user
     public async Task<UserEntity> UpdateUser(Guid callerId, Guid userId, UserEntity request, CancellationToken cancellationToken = default)
     {
         var user = await GetUser(userId, cancellationToken);
@@ -57,7 +60,8 @@ public class UserService : IUserService
         await UserRepo.SaveChangesAsync(cancellationToken);
         return user;
     }
-    
+
+    // Delete user
     public async Task DeleteUser(Guid userId, CancellationToken cancellationToken = default)
     {
         await CommentService.DeleteUserComments(userId, cancellationToken);
