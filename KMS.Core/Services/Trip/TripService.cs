@@ -18,12 +18,13 @@ public class TripService : ITripService
 
     private IRepository<TripEntity> TripRepo { get; }
 
+//GetTrips
     public async Task<ICollection<TripEntity>> GetTrips(GetTripRequest request, Guid callerId, bool hasPermissionViewAll, CancellationToken cancellationToken = default)
     {
         var spec = new GetTripsSpec(request, callerId, hasPermissionViewAll);
         return await TripRepo.ListAsync(spec, cancellationToken);
     }
-
+//GetTrip
     public async Task<TripEntity> GetTrip(Guid tripId, CancellationToken cancellationToken = default)
     {
         var spec = new GetTripSpec(tripId);
@@ -36,7 +37,7 @@ public class TripService : ITripService
 
         return trip;
     }
-
+//CreateTrip
     public async Task<TripEntity> CreateTrip(CreateTripRequest request, Guid callerId, CancellationToken cancellationToken = default)
     {
         var tripId = Guid.NewGuid();
@@ -59,7 +60,7 @@ public class TripService : ITripService
 
         return await GetTrip(trip.Id, cancellationToken);
     }
-
+//UpdateTrip
     public async Task<TripEntity> UpdateTrip(Guid tripId, TripEntity request, CancellationToken cancellationToken = default)
     {
         var trip = await GetTrip(tripId, cancellationToken);
@@ -70,7 +71,7 @@ public class TripService : ITripService
         
         return trip;
     }
-
+//DeleteTrip
     public async Task DeleteTrip(Guid tripId, CancellationToken cancellationToken = default)
     {
         var trip = await GetTrip(tripId, cancellationToken);
