@@ -8,6 +8,7 @@ public interface ITripService
     Task<ICollection<TripEntity>> GetTrips(GetTripRequest request, Guid callerId, bool hasPermissionViewAll, CancellationToken cancellationToken = default);
 
     Task<TripEntity> GetTrip(Guid tripId, CancellationToken cancellationToken = default);
+    Task<TripEntity> GetTripById(Guid tripId, CancellationToken cancellationToken = default);
     
     Task<TripEntity> CreateTrip(CreateTripRequest request, Guid callerId, CancellationToken cancellationToken = default);
     

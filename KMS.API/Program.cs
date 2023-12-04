@@ -123,6 +123,7 @@ MigrateDb(app);
 
 app.Run();
 
+
 static void MigrateDb(WebApplication app)
 {
     using (var scope = app.Services.CreateScope())
@@ -141,3 +142,5 @@ static void MigrateDb(WebApplication app)
         }
     }
 }
+
+public partial class Program { }

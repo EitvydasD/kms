@@ -59,14 +59,7 @@ public class UserService : IUserService
     {
         var user = await GetUser(userId, cancellationToken);
 
-        user.FirstName = request.FirstName;
-        user.LastName = request.LastName;
-        user.Phone = request.Phone;
-        user.Email = request.Email;
-        user.BirthDate = request.BirthDate;
-        user.PasswordChangedAt = DateTimeOffset.UtcNow;
-
-        user.Roles = userId != callerId ? request.Roles : user.Roles;
+        user.Update(callerId, request);
 
         await UserRepo.SaveChangesAsync(cancellationToken);
         return user;

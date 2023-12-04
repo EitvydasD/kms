@@ -18,8 +18,6 @@ public class UserServiceTests
         FirstName = "The name of the Admin",
         LastName = "The last name of the Admin",
         Phone = "1234567890",
-        PasswordSalt = 0x0F0C91690E88DD4E4AB935D7F13B6AD92CA873B5,
-        PasswordHash = 
     };
 
     protected UserEntity User => new()

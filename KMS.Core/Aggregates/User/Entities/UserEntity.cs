@@ -32,6 +32,21 @@ public class UserEntity : BaseEntity, IAggregateRoot
         .Select(x => x.PermissionId)
         .Distinct();
 
+    public void Update(Guid callerId, UserEntity request)
+    {
+        FirstName = request.FirstName;
+        LastName = request.LastName;
+        Phone = request.Phone;
+        Email = request.Email;
+        BirthDate = request.BirthDate;
+        PasswordChangedAt = DateTimeOffset.UtcNow;
+
+        if (callerId != Id)
+        {
+            Roles = request.Roles;
+        }
+    }
+
     #region Password
 
     public void CheckPassword(string password)

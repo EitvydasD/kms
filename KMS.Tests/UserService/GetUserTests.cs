@@ -4,7 +4,7 @@ namespace KMS.Tests.UserService;
 public class GetUserTests : UserServiceTests
 {
     [Fact]
-    public async Task GetUser_UserFound()
+    public async Task GetUser_Success()
     {
         var service = MockServiceWithData(AdminUser, User);
 
