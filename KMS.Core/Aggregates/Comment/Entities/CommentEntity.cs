@@ -16,12 +16,4 @@ public class CommentEntity : BaseEntity, IAggregateRoot
     public Guid? ParentId { get; set; }
 
     public CommentEntity? Parent { get; set; }
-
-    public void Post(PostCommentRequest request)
-    {
-        Title = request.Title;
-        Text = request.Text;
-        ParentId = request.ParentId;
-        AuthorId = request.AuthorId;
-    }
 }

@@ -5,6 +5,7 @@ using KMS.Core.Interfaces.User;
 using KMS.Core.Exceptions;
 using Utils.Library.Interfaces;
 using KMS.Core.Aggregates.User.Requests;
+using System.Data;
 
 namespace KMS.Core.Services.User;
 
@@ -37,6 +38,18 @@ public class UserService : IUserService
         return role;
     }
 
+    public async Task<UserEntity> GetUserById(Guid userId, CancellationToken cancellationToken = default)
+    {
+        var user = await UserRepo.GetByIdAsync(userId, cancellationToken);
+
+        if (user is null)
+        {
+            throw new UserNotFoundException(userId);
+        }
+
+        return user;
+    }
+
     public async Task<UserEntity> CreateUser(UserEntity request, CancellationToken cancellationToken = default)
     {
         return await UserRepo.AddAsync(request, cancellationToken);
@@ -46,12 +59,16 @@ public class UserService : IUserService
     {
         var user = await GetUser(userId, cancellationToken);
 
-        user.Update(request);
+        user.Update(request, userId != callerId ? request.Roles : null);
 
-        if (userId != callerId)
-        {
-            user.UpdateRoles(request.Roles);
-        }
+        user.FirstName = request.FirstName;
+        user.LastName = request.LastName;
+        user.Phone = request.Phone;
+        user.Email = request.Email;
+        user.BirthDate = request.BirthDate;
+        user.PasswordChangedAt = DateTimeOffset.UtcNow;
+
+        user.Roles = userId != callerId ? request.Roles : user.Roles;
 
         await UserRepo.SaveChangesAsync(cancellationToken);
         return user;

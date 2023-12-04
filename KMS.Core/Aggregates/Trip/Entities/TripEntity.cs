@@ -16,14 +16,4 @@ public class TripEntity : BaseEntity, IAggregateRoot
     public List<UserTripEntity> Responsible { get; set; } = new();
 
     public TripStatus Status { get; set; } = TripStatus.Pending;
-
-
-    public void Update(TripEntity trip)
-    {
-        DriverId = trip.DriverId;
-        DepartedAt = trip.DepartedAt;
-        ArrivedAt = trip.ArrivedAt;
-        Status = trip.Status;
-        Responsible = trip.Responsible;
-    }
 }

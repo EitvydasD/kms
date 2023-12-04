@@ -64,7 +64,11 @@ public class TripService : ITripService
     {
         var trip = await GetTrip(tripId, cancellationToken);
 
-        trip.Update(request);
+        trip.DriverId = trip.DriverId;
+        trip.DepartedAt = trip.DepartedAt;
+        trip.ArrivedAt = trip.ArrivedAt;
+        trip.Status = trip.Status;
+        trip.Responsible = trip.Responsible;
 
         await TripRepo.SaveChangesAsync(cancellationToken);
         

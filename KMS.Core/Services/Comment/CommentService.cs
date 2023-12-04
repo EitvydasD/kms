@@ -3,6 +3,7 @@ using KMS.Core.Aggregates.Comment.Requests;
 using KMS.Core.Aggregates.Comment.Specs;
 using KMS.Core.Interfaces.Comment;
 using Utils.Library.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace KMS.Core.Services.Comment;
 public class CommentService : ICommentService
@@ -24,7 +25,10 @@ public class CommentService : ICommentService
     {
         var entity = new CommentEntity();
 
-        entity.Post(request);
+        entity.Title = request.Title;
+        entity.Text = request.Text;
+        entity.ParentId = request.ParentId;
+        entity.AuthorId = request.AuthorId;
 
         return await CommentRepo.AddAsync(entity, cancellationToken);
     }
