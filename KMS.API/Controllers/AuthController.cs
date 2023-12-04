@@ -48,7 +48,7 @@ public class AuthController : BaseController
         return new AuthenticationResponseModel(accessToken);
     }
 
-    private string GenerateJwtToken(ICollection<Claim> claims)
+    private static string GenerateJwtToken(ICollection<Claim> claims)
     {
         var key = Encoding.UTF8.GetBytes("SSSuuuuperKeyKeyKEYKeYKEy!");
         var tokenDescriptor = new SecurityTokenDescriptor

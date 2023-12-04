@@ -23,12 +23,12 @@ public class AnyPermissionRequiredFilter : IAsyncAuthorizationFilter
         Permissions = permissions;
     }
 
-    public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
+    public Task OnAuthorizationAsync(AuthorizationFilterContext context)
     {
         var principal = ClaimPricinpalProvider.GetPrincipal(context.HttpContext);
         if (principal == null)
         {
-            return;
+            return Task.CompletedTask;
         }
 
         foreach (var permission in Permissions)
@@ -36,9 +36,10 @@ public class AnyPermissionRequiredFilter : IAsyncAuthorizationFilter
             var authorized = principal.Claims.Any(x => x.Type == PermissionsRequiredAttribute.PermissionType && x.Value == permission.ToString());
             if (authorized)
             {
-                return;
+                return Task.CompletedTask;
             }
         }
         throw new ForbiddenException("Access to this resource is denied.");
+
     }
 }
