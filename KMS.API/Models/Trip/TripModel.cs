@@ -21,19 +21,6 @@ public class TripModel
 
     [JsonConverter(typeof(SmartEnumValueConverter<TripStatus, int>))]
     public TripStatus Status { get; init; } = TripStatus.Pending;
-
-    public TripEntity ToEntity(Guid? tripId) => new()
-    {
-        Id = tripId ?? Id,
-        DriverId = Driver?.Id ?? Guid.Empty,
-        DepartedAt = DepartedAt,
-        ArrivedAt = ArrivedAt,
-        Status = Status,
-        Responsible = new List<UserTripEntity>(Responsible.Select(x => new UserTripEntity
-            {
-                UserId = x.Id,
-                TripId = tripId ?? Id
-            }))
-    };
+   
     
 }

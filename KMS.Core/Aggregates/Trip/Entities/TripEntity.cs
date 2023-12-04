@@ -1,4 +1,25 @@
-public static TripEntity Create(Guid callerId, CreateTripRequest request)
+using KMS.Core.Aggregates.Trip.Requests;
+using KMS.Core.Aggregates.User.Entities;
+using Utils.Library.Interfaces;
+
+namespace KMS.Core.Aggregates.Trip.Entities;
+
+public class TripEntity : BaseEntity, IAggregateRoot
+{
+    public Guid DriverId { get; set; }
+
+    public UserEntity? Driver { get; set; }
+
+    public DateTime? DepartedAt { get; set; }
+
+    public DateTime? ArrivedAt { get; set; }
+
+    public List<UserTripEntity> Responsible { get; set; } = new();
+
+    public TripStatus Status { get; set; } = TripStatus.Pending;
+
+
+    public static TripEntity Create(Guid callerId, CreateTripRequest request)
     {
         var tripId = Guid.NewGuid();
 
@@ -26,3 +47,8 @@ public static TripEntity Create(Guid callerId, CreateTripRequest request)
         Status = request.Status;
         Responsible = request.Responsible;
     }
+
+}
+
+
+

@@ -1,7 +1,6 @@
 ﻿using KMS.Core.Aggregates.User.Entities;
 using KMS.Core.Interfaces.Comment;
 using KMS.Core.Interfaces.User;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Moq;
 using Utils.Library.Interfaces;
 
@@ -40,7 +39,7 @@ public class UserServiceTests
                     .Setup(repo => repo.GetByIdAsync(user.Id, CancellationToken.None))
                     .ReturnsAsync(user);
         }
-        
+
         return new Core.Services.User.UserService(mockRepo.Object, new Mock<ICommentService>().Object);
     }
 }

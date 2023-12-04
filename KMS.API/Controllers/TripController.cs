@@ -45,7 +45,7 @@ public class TripController : BaseController
     [HttpPut("{tripId:Guid}")]
     public async Task<TripModel> UpdateTrip([FromRoute] Guid tripId, [FromBody] TripModel request, CancellationToken cancellationToken = default)
     {
-        var response = await _tripService.UpdateTrip(tripId, request.ToEntity(tripId), cancellationToken);
+        var response = await _tripService.UpdateTrip(tripId, new(), cancellationToken);
         return Mapper.Map<TripModel>(response);
     }
 
