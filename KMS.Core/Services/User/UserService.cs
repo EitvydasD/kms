@@ -59,8 +59,6 @@ public class UserService : IUserService
     {
         var user = await GetUser(userId, cancellationToken);
 
-        user.Update(request, userId != callerId ? request.Roles : null);
-
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
         user.Phone = request.Phone;
