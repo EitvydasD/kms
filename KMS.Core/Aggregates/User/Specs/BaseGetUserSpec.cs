@@ -1,7 +1,7 @@
 using Ardalis.Specification;
 using KMS.Core.Aggregates.User.Entities;
 
-namespace KMS.Core.Aggregates.Users.Specs;
+namespace KMS.Core.Aggregates.User.Specs;
 
 public abstract class BaseGetUserSpec : Specification<UserEntity>, ISingleResultSpecification
 {

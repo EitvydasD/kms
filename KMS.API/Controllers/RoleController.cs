@@ -1,6 +1,6 @@
 ﻿using KMS.API.Models.Role;
-using KMS.Core;
 using KMS.Core.Aggregates.Role;
+using KMS.Core.Attributes;
 using KMS.Core.Interfaces.Role;
 using Microsoft.AspNetCore.Mvc;
 

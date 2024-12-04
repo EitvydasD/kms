@@ -1,9 +1,8 @@
-﻿using KMS.Core.Attributes;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Utils.Library.Exceptions;
 
-namespace KMS.Core;
+namespace KMS.Core.Attributes;
 public class PermissionsRequiredAttribute : TypeFilterAttribute
 {
     public static string PermissionType => "Permissions";

@@ -1,6 +1,6 @@
 using Ardalis.Specification;
 
-namespace KMS.Core.Aggregates.Users.Specs;
+namespace KMS.Core.Aggregates.User.Specs;
 
 public class GetUserByUsernameSpec : BaseGetUserSpec
 {

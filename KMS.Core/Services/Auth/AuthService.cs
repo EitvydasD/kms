@@ -4,10 +4,10 @@ using KMS.Core.Aggregates.Role.Entities;
 using KMS.Core.Aggregates.Role.Filters;
 using KMS.Core.Aggregates.Role.Specs;
 using KMS.Core.Aggregates.User.Entities;
-using KMS.Core.Aggregates.Users.Specs;
 using KMS.Core.Interfaces.Auth;
 using KMS.Core.Exceptions;
 using Utils.Library.Interfaces;
+using KMS.Core.Aggregates.User.Specs;
 
 namespace KMS.Core.Services.Auth;
 

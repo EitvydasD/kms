@@ -1,14 +1,16 @@
 ﻿using KMS.API.Models.User;
 using KMS.Core.Aggregates.Role;
 using KMS.Core.Interfaces.User;
-using KMS.Core;
 using Microsoft.AspNetCore.Mvc;
 using KMS.Core.Aggregates.User.Requests;
+using Microsoft.AspNetCore.Authorization;
+using KMS.Core.Attributes;
 
 namespace KMS.API.Controllers;
 
 [ApiController]
 [PermissionsRequired(nameof(PermissionId.UserView))]
+//[AllowAnonymous]
 [Route("api/user")]
 public class UserController : BaseController
 {

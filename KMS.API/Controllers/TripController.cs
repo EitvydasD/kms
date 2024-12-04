@@ -1,7 +1,7 @@
 ﻿using KMS.API.Models.Trip;
-using KMS.Core;
 using KMS.Core.Aggregates.Role;
 using KMS.Core.Aggregates.Trip.Requests;
+using KMS.Core.Attributes;
 using KMS.Core.Interfaces.Trip;
 using Microsoft.AspNetCore.Mvc;
 

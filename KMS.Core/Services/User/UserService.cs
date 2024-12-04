@@ -1,5 +1,5 @@
 using KMS.Core.Aggregates.User.Entities;
-using KMS.Core.Aggregates.Users.Specs;
+using KMS.Core.Aggregates.User.Specs;
 using KMS.Core.Interfaces.Comment;
 using KMS.Core.Interfaces.User;
 using KMS.Core.Exceptions;

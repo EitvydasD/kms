@@ -134,6 +134,9 @@ static void MigrateDb(WebApplication app)
         {
             var context = services.GetRequiredService<DatabaseContext>();
             context.Database.Migrate();
+
+            var seeder = new DatabaseSeeder(context);
+            seeder.Seed();
         }
         catch (Exception ex)
         {

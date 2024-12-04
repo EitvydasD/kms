@@ -2,7 +2,7 @@ using Ardalis.Specification;
 using KMS.Core.Aggregates.User.Entities;
 using KMS.Core.Aggregates.User.Requests;
 
-namespace KMS.Core.Aggregates.Users.Specs;
+namespace KMS.Core.Aggregates.User.Specs;
 
 public class GetUsersSpec : Specification<UserEntity>
 {
