@@ -59,12 +59,7 @@ public class UserService : IUserService
     {
         var user = await GetUser(userId, cancellationToken);
 
-        user.Update(request);
-
-        if (userId != callerId)
-        {
-            user.UpdateRoles(request.Roles);
-        }
+        user.Update(callerId, request);
 
         await UserRepo.SaveChangesAsync(cancellationToken);
         return user;

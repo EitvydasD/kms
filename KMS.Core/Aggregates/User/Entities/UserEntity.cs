@@ -25,26 +25,27 @@ public class UserEntity : BaseEntity, IAggregateRoot
     public byte[] PasswordHash { get; private set; } = Array.Empty<byte>();
     
     public List<UserRoleEntity> Roles { get; set; } = new();
-    
-    public void Update(UserEntity request)
-    {
-        FirstName= request.FirstName;
-        LastName= request.LastName;
-        Phone = request.Phone;
-        Email = request.Email;
-        BirthDate = request.BirthDate;
-    }
-
-    public void UpdateRoles(List<UserRoleEntity> roles)
-    {
-        Roles = roles;
-    }
 
     public IEnumerable<string> GetPermissions() => Roles
         .Select(x => x.Role)
         .SelectMany(x => x.Permissions)
         .Select(x => x.PermissionId)
         .Distinct();
+
+    public void Update(Guid callerId, UserEntity request)
+    {
+        FirstName = request.FirstName;
+        LastName = request.LastName;
+        Phone = request.Phone;
+        Email = request.Email;
+        BirthDate = request.BirthDate;
+        PasswordChangedAt = DateTimeOffset.UtcNow;
+
+        if (callerId != Id)
+        {
+            Roles = request.Roles;
+        }
+    }
 
     #region Password
 
@@ -56,13 +57,6 @@ public class UserEntity : BaseEntity, IAggregateRoot
         {
             throw new IncorrectCredentialsException($"Incorrect credentials.");
         }
-    }
-
-    public void ChangePassword(string currentPassword, string newPassword)
-    {
-        CheckPassword(currentPassword);
-
-        ChangePassword(newPassword);
     }
 
     public void ChangePassword(string password)
