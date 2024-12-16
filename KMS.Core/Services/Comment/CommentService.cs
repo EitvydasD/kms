@@ -22,9 +22,7 @@ public class CommentService : ICommentService
 
     public async Task<CommentEntity> PostComment(PostCommentRequest request, CancellationToken cancellationToken = default)
     {
-        var entity = new CommentEntity();
-
-        entity.Post(request);
+        var entity = CommentEntity.Create(request);
 
         return await CommentRepo.AddAsync(entity, cancellationToken);
     }

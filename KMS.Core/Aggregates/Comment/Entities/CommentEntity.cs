@@ -1,4 +1,5 @@
-﻿using KMS.Core.Aggregates.Comment.Requests;
+﻿using Ardalis.Specification;
+using KMS.Core.Aggregates.Comment.Requests;
 using KMS.Core.Aggregates.User.Entities;
 using Utils.Library.Interfaces;
 
@@ -17,11 +18,11 @@ public class CommentEntity : BaseEntity, IAggregateRoot
 
     public CommentEntity? Parent { get; set; }
 
-    public void Post(PostCommentRequest request)
+    public static CommentEntity Create(PostCommentRequest request) => new()
     {
-        Title = request.Title;
-        Text = request.Text;
-        ParentId = request.ParentId;
-        AuthorId = request.AuthorId;
-    }
+        Title = request.Title,
+        Text = request.Text,
+        ParentId = request.ParentId,
+        AuthorId = request.AuthorId
+    };
 }

@@ -51,25 +51,11 @@ public class TripService : ITripService
 
     public async Task<TripEntity> CreateTrip(CreateTripRequest request, Guid callerId, CancellationToken cancellationToken = default)
     {
-        var tripId = Guid.NewGuid();
+        var entity = TripEntity.Create(callerId, request);
+        
+        await TripRepo.AddAsync(entity, cancellationToken);
 
-        var trip = new TripEntity
-        {
-            Id = tripId,
-            DriverId = request.DriverId ?? callerId,
-            DepartedAt = request.DepartedAt,
-            ArrivedAt = request.ArrivedAt,
-            Status = request.Status,
-            Responsible = new List<UserTripEntity>
-                {
-                    new UserTripEntity{ UserId = callerId, TripId = tripId }
-                },
-        };
-
-
-        await TripRepo.AddAsync(trip, cancellationToken);
-
-        return await GetTrip(trip.Id, cancellationToken);
+        return await GetTrip(entity.Id, cancellationToken);
     }
 
     public async Task<TripEntity> UpdateTrip(Guid tripId, TripEntity request, CancellationToken cancellationToken = default)

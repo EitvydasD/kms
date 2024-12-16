@@ -1,4 +1,5 @@
-﻿using KMS.Core.Aggregates.User.Entities;
+﻿using KMS.Core.Aggregates.Trip.Requests;
+using KMS.Core.Aggregates.User.Entities;
 using Utils.Library.Interfaces;
 
 namespace KMS.Core.Aggregates.Trip.Entities;
@@ -17,13 +18,32 @@ public class TripEntity : BaseEntity, IAggregateRoot
 
     public TripStatus Status { get; set; } = TripStatus.Pending;
 
-
-    public void Update(TripEntity trip)
+    public static TripEntity Create(Guid callerId, CreateTripRequest request)
     {
-        DriverId = trip.DriverId;
-        DepartedAt = trip.DepartedAt;
-        ArrivedAt = trip.ArrivedAt;
-        Status = trip.Status;
-        Responsible = trip.Responsible;
+        var tripId = Guid.NewGuid();
+
+        var trip = new TripEntity
+        {
+            Id = tripId,
+            DriverId = request.DriverId ?? callerId,
+            DepartedAt = request.DepartedAt,
+            ArrivedAt = request.ArrivedAt,
+            Status = request.Status,
+            Responsible = new List<UserTripEntity>
+            {
+                new UserTripEntity{ UserId = callerId, TripId = tripId }
+            },
+        };
+
+        return trip;
+    }
+
+    public void Update(TripEntity request)
+    {
+        DriverId = request.DriverId;
+        DepartedAt = request.DepartedAt;
+        ArrivedAt = request.ArrivedAt;
+        Status = request.Status;
+        Responsible = request.Responsible;
     }
 }

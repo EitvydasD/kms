@@ -1,7 +1,7 @@
 ﻿using KMS.API.Models.Trip;
-using KMS.Core;
 using KMS.Core.Aggregates.Role;
 using KMS.Core.Aggregates.Trip.Requests;
+using KMS.Core.Attributes;
 using KMS.Core.Interfaces.Trip;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,47 +12,32 @@ namespace KMS.API.Controllers;
 [Route("api/trip")]
 public class TripController : BaseController
 {
+    private readonly ITripService _tripService;
+    
     public TripController(ITripService tripService)
     {
-        TripService = tripService ?? throw new ArgumentNullException(nameof(tripService));
+        _tripService = tripService ?? throw new ArgumentNullException(nameof(tripService));
     }
-    
-    private ITripService TripService { get; }
 
     [HttpGet]
     public async Task<ICollection<TripModel>> GetTrips([FromQuery] GetTripRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await TripService.GetTrips(request, Caller.UserId, Caller.Permissions.Contains(nameof(PermissionId.TripViewAll)), cancellationToken);
-
-        var model = new List<TripModel>();
-
-        foreach (var item in response)
-        {
-            model.Add(new TripModel
-            {
-                Id = item.Id,
-                Driver = new(item.Driver),
-                DepartedAt = item.DepartedAt,
-                ArrivedAt = item.ArrivedAt,
-                Status = item.Status,
-            });
-        }
-
-        return model;
+        var response = await _tripService.GetTrips(request, Caller.UserId, Caller.Permissions.Contains(nameof(PermissionId.TripViewAll)), cancellationToken);
+        return response.Select(item => Mapper.Map<TripModel>(item)).ToList();
     }
 
     [HttpGet("{tripId:Guid}")]
     public async Task<TripModel> GetTrip([FromRoute] Guid tripId, CancellationToken cancellationToken = default)
     {
-        var response = await TripService.GetTrip(tripId, cancellationToken);
+        var response = await _tripService.GetTrip(tripId, cancellationToken);
         return Mapper.Map<TripModel>(response);
     }
-    
+
     [PermissionsRequired(nameof(PermissionId.TripModify))]
     [HttpPost]
     public async Task<TripModel> CreateTrip([FromBody] CreateTripRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await TripService.CreateTrip(request, Caller.UserId, cancellationToken);
+        var response = await _tripService.CreateTrip(request, Caller.UserId, cancellationToken);
         return Mapper.Map<TripModel>(response);
     }
 
@@ -60,7 +45,7 @@ public class TripController : BaseController
     [HttpPut("{tripId:Guid}")]
     public async Task<TripModel> UpdateTrip([FromRoute] Guid tripId, [FromBody] TripModel request, CancellationToken cancellationToken = default)
     {
-        var response = await TripService.UpdateTrip(tripId, request.ToEntity(tripId), cancellationToken);
+        var response = await _tripService.UpdateTrip(tripId, new(), cancellationToken);
         return Mapper.Map<TripModel>(response);
     }
 
@@ -68,6 +53,6 @@ public class TripController : BaseController
     [HttpDelete("{tripId:Guid}")]
     public async Task DeleteTrip([FromRoute] Guid tripId, CancellationToken cancellationToken = default)
     {
-        await TripService.DeleteTrip(tripId, cancellationToken);
+        await _tripService.DeleteTrip(tripId, cancellationToken);
     }
 }
