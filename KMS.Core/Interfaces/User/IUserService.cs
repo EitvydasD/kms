@@ -8,6 +8,8 @@ public interface IUserService
     Task<ICollection<UserEntity>> GetUsers(GetUserRequest request, CancellationToken cancellationToken = default);
 
     Task<UserEntity> GetUser(Guid userId, CancellationToken cancellationToken = default);
+    
+    Task<UserEntity> GetUserById(Guid userId, CancellationToken cancellationToken = default);
 
     Task<UserEntity> CreateUser(UserEntity request, CancellationToken cancellationToken = default);
     

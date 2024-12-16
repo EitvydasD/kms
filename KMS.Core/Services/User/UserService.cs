@@ -1,10 +1,11 @@
 using KMS.Core.Aggregates.User.Entities;
-using KMS.Core.Aggregates.Users.Specs;
+using KMS.Core.Aggregates.User.Specs;
 using KMS.Core.Interfaces.Comment;
 using KMS.Core.Interfaces.User;
 using KMS.Core.Exceptions;
 using Utils.Library.Interfaces;
 using KMS.Core.Aggregates.User.Requests;
+using System.Data;
 
 namespace KMS.Core.Services.User;
 
@@ -35,6 +36,18 @@ public class UserService : IUserService
         }
 
         return role;
+    }
+
+    public async Task<UserEntity> GetUserById(Guid userId, CancellationToken cancellationToken = default)
+    {
+        var user = await UserRepo.GetByIdAsync(userId, cancellationToken);
+
+        if (user is null)
+        {
+            throw new UserNotFoundException(userId);
+        }
+
+        return user;
     }
 
     public async Task<UserEntity> CreateUser(UserEntity request, CancellationToken cancellationToken = default)

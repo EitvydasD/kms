@@ -37,6 +37,18 @@ public class TripService : ITripService
         return trip;
     }
 
+    public async Task<TripEntity> GetTripById(Guid tripId, CancellationToken cancellationToken = default)
+    {
+        var trip = await TripRepo.GetByIdAsync(tripId, cancellationToken);
+
+        if (trip is null)
+        {
+            throw new TripNotFoundException(tripId);
+        }
+
+        return trip;
+    }
+
     public async Task<TripEntity> CreateTrip(CreateTripRequest request, Guid callerId, CancellationToken cancellationToken = default)
     {
         var tripId = Guid.NewGuid();

@@ -123,6 +123,7 @@ MigrateDb(app);
 
 app.Run();
 
+
 static void MigrateDb(WebApplication app)
 {
     using (var scope = app.Services.CreateScope())
@@ -133,6 +134,9 @@ static void MigrateDb(WebApplication app)
         {
             var context = services.GetRequiredService<DatabaseContext>();
             context.Database.Migrate();
+
+            var seeder = new DatabaseSeeder(context);
+            seeder.Seed();
         }
         catch (Exception ex)
         {
@@ -141,3 +145,5 @@ static void MigrateDb(WebApplication app)
         }
     }
 }
+
+public partial class Program { }
