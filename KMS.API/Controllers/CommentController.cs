@@ -1,9 +1,7 @@
 ﻿using KMS.API.Models.Comment;
-using KMS.API.Models.User;
-using KMS.Core;
-using KMS.Core.Aggregates.Comment.Entities;
 using KMS.Core.Aggregates.Comment.Requests;
 using KMS.Core.Aggregates.Role;
+using KMS.Core.Attributes;
 using KMS.Core.Interfaces.Comment;
 using Microsoft.AspNetCore.Mvc;
 

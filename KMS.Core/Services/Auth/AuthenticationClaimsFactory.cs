@@ -1,4 +1,5 @@
 using KMS.Core.Aggregates.Auth;
+using KMS.Core.Attributes;
 using KMS.Core.Interfaces;
 using System.Globalization;
 using System.Security.Claims;

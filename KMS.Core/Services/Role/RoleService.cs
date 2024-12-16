@@ -32,9 +32,9 @@ public class RoleService : IRoleService
         return role;
     }
 
-    public async Task<RoleEntity> CreateRole(RoleEntity role, CancellationToken cancellationToken = default)
+    public async Task<RoleEntity> CreateRole(RoleEntity request, CancellationToken cancellationToken = default)
     {
-        return await RoleRepo.AddAsync(role, cancellationToken);
+        return await RoleRepo.AddAsync(request, cancellationToken);
     }
 
     public async Task<RoleEntity> UpdateRole(Guid roleId, RoleEntity role, CancellationToken cancellationToken = default)
